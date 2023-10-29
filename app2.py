@@ -15,12 +15,16 @@ import sys
 
 if sys.platform.startswith('linux'):
     print("Running on Linux")
-    wsl_env_path = r"app2.env"  # use this format if app run under linux
+    # wsl_env_path = r"app2.env"  # use this format if app run under linux
+    wsl_env_path = os.environ.get("MY_ENV_PATH")
 elif sys.platform.startswith('win'):
     print("Running on Windows")
     # Define the path to the WSL ".env" file using the network share path
     # wsl_env_path = r"\\wsl.localhost\Debian\home\han\.env"
-    wsl_env_path = r"\\wsl.localhost\Debian\home\han\app2.env"  # use this format if app run under win10
+
+
+    wsl_env_path = r"app2.env"  # under windows same app dir path
+    # wsl_env_path = r"\\wsl.localhost\Debian\home\han\app2.env"  # use this format if app run under win10
 
 
 # Load environment variables from the WSL ".env" file
