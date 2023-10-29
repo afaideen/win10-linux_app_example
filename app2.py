@@ -22,7 +22,8 @@ elif sys.platform.startswith('win'):
     # Define the path to the WSL ".env" file using the network share path
     # wsl_env_path = r"\\wsl.localhost\Debian\home\han\.env"
 
-
+    # ref: how to setup env variable under win
+    # https://chat.openai.com/c/414b700d-e5de-4b5f-b259-12cf859a708a
     wsl_env_path = r"app2.env"  # under windows same app dir path
     # wsl_env_path = r"\\wsl.localhost\Debian\home\han\app2.env"  # use this format if app run under win10
 
