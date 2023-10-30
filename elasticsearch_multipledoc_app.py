@@ -5,6 +5,8 @@
 # Optional references:
 #  - https://askubuntu.com/questions/1427872/running-elasticsearch-on-ubuntu-on-wsl-system-has-not-been-booted-with-systemd
 
+
+# Run docker and elasticsearch should automatically started in WSL Linux
 import time
 
 from elasticsearch import Elasticsearch
