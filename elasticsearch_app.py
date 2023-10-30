@@ -1,10 +1,23 @@
 from elasticsearch import Elasticsearch
 
 # Connect to Elasticsearch
-es = Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = Elasticsearch([{'host': 'localhost', 'port': 9200}], timeout=3)
+try:
+    if es.ping():
+        print("Successfully connected to Elasticsearch")
+    else:
+        raise ConnectionError("Failed to connect to Elasticsearch")
+except ConnectionError as e:
+    print(f"Connection error: {str(e)}")
 
-# Create an index called "my_index"
-es.indices.create(index='my_index')
+
+index_name = 'my_index'
+# Create the index with a custom timeout
+try:
+    es.indices.create(index=index_name, timeout='10s')
+    print(f"The index '{index_name}' was created successfully.")
+except Exception as e:
+    print(f"Failed to create the index '{index_name}': {str(e)}")
 
 # Index a document in "my_index"
 document = {
