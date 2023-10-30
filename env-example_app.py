@@ -17,6 +17,7 @@ if sys.platform.startswith('linux'):
     print("Running on Linux")
     # wsl_env_path = r"app2.env"  # use this format if app run under linux
     wsl_env_path = os.environ.get("MY_ENV_PATH")    # in linux execute > export MY_ENV_PATH=secret/app2.env, format is export MY_ENV_PATH=/full/path/to/app2.env
+    print('wsl_env_path: ',wsl_env_path)
 elif sys.platform.startswith('win'):
     print("Running on Windows")
     # Define the path to the WSL ".env" file using the network share path
