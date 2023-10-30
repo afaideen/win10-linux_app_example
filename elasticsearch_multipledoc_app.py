@@ -102,7 +102,7 @@ response = es.search(index='my_index', body=search_query)
 
 # Print the search results
 for hit in response['hits']['hits']:
-    print(hit['_source'])
+    print('Found! ', hit['_source'])
 
 # Delete the index
 es.indices.delete(index='my_index')
