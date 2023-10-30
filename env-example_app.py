@@ -12,6 +12,7 @@
 from dotenv import load_dotenv
 import os
 import sys
+import platform
 
 
 def get_linux_distribution():
@@ -33,18 +34,28 @@ if sys.platform.startswith('linux'):
     print("Running on Linux")
     dist_name, version = get_linux_distribution()
     print(f"Distribution: {dist_name}, Version: {version}")
-    print(f"Distribution: {dist_name}, Version: {version}, ID: {id}")
     # wsl_env_path = r"app2.env"  # use this format if app run under linux
     wsl_env_path = os.environ.get("MY_ENV_PATH")    # in linux execute > export MY_ENV_PATH=secret/app2.env, format is export MY_ENV_PATH=/full/path/to/app2.env
     print('wsl_env_path: ',wsl_env_path)
 elif sys.platform.startswith('win'):
     print("Running on Windows")
+    system_info = platform.uname()
+    # Access Windows version information
+    system = system_info.system
+    release = system_info.release
+    version = system_info.version
+    machine = system_info.machine
+    node = system_info.node
+    info_string = f"System: {system_info.system}, Release: {system_info.release}, Version: {system_info.version}, Machine: {system_info.machine}, PC Name: {system_info.node}"
+    print(info_string)
+
+
     # Define the path to the WSL ".env" file using the network share path
     # wsl_env_path = r"\\wsl.localhost\Debian\home\han\.env"
 
     # ref: how to setup env variable under win
     # https://chat.openai.com/c/414b700d-e5de-4b5f-b259-12cf859a708a
-    wsl_env_path = r"app2.env"  # under windows same app dir path
+    wsl_env_path = r"secret\\app2.env"  # under windows same app dir path
     # wsl_env_path = r"\\wsl.localhost\Debian\home\han\app2.env"  # use this format if app run under win10
 
 
