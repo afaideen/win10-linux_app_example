@@ -14,13 +14,13 @@ def greet():
 
 @greet.command()
 @click.option('--name', prompt='Your name', help='The person to greet.')
-def hello(name):
+def hello(name):    # > flask greet hello --name han
     """Simple program that greets NAME."""
     click.echo(f'Hello {name.capitalize()}, how can I help you?')
 
 @greet.command()
 @click.option('--name', prompt='Your name', help='The person to greet.')
-def hi(name):
+def hi(name):   # > flask greet hi --name han
     """Simple program that greets NAME."""
     click.echo(f'Hi {name.capitalize()}, how are you getting on?')
 
@@ -30,7 +30,13 @@ def show_all_commands():
     ctx = click.get_current_context()
     click.echo("Available Commands:")
     for command in greet.commands:
-        click.echo(f" - {command}")
+        if isinstance(greet.get_command(ctx, command), click.Group):
+            click.echo(f" - {command}")
+            subcommands = greet.get_command(ctx, command).commands
+            for subcommand in subcommands:
+                click.echo(f"   - {subcommand}")
+        else:
+            click.echo(f" - {command}")
 
 app.cli.add_command(greet)
 app.cli.add_command(show_all_commands)
