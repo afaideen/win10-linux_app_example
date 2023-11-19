@@ -29,14 +29,14 @@ def show_all_commands():
     """Print all available commands."""
     ctx = click.get_current_context()
     click.echo("Available Commands:")
-    for command in greet.commands:
-        if isinstance(greet.get_command(ctx, command), click.Group):
-            click.echo(f" - {command}")
-            subcommands = greet.get_command(ctx, command).commands
-            for subcommand in subcommands:
-                click.echo(f"   - {subcommand}")
+    for command in app.cli.commands.values():
+        if isinstance(command, click.core.Group):
+            click.echo(f" - {command.name}")
+            for subcommand in command.commands.values():
+                params = ", ".join(f"{param.name}: {param.type}" for param in subcommand.params)
+                click.echo(f"   - {subcommand.name}({params})")
         else:
-            click.echo(f" - {command}")
+            click.echo(f" - {command.name}")
 
 app.cli.add_command(greet)
 app.cli.add_command(show_all_commands)
